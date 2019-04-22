@@ -1,0 +1,37 @@
+/.project
+/.settings
+/.idea
+.DS_Store
+/tmp
+
+# NPM packages used by Grunt.js
+/node_modules
+package-lock.json
+
+# NPM debug log
+npm-debug.log
+
+# build directory
+/build
+
+# asset files generated for the build
+/plugin/assets/js/**/*.min.map
+/plugin/assets/js/**/*.min.js
+/plugin/assets/js/**/*.min.js.map
+/plugin/assets/css/**/*.min.css
+/plugin/assets/css/**/*.min.css.map
+
+# Composer
+composer.phar
+/vendor
+
+# WP Tests
+.env.test
+codeception.yml
+/tests/tmp/
+/tests/tmp/*
+/tests/_output/
+/tests/_output/*
+
+# map files
+*.map

@@ -1,0 +1,11 @@
+{
+  "name": "skyverge/simple-registration-for-woocommerce",
+  "type": "project",
+  "authors": [
+    {
+      "name": "SkyVerge",
+      "email": "info@skyverge.com"
+    }
+  ],
+  "minimum-stability": "dev"
+}

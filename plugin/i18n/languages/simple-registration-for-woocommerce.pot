@@ -1,0 +1,125 @@
+# Copyright (C) 2019 SkyVerge
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple registration for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: "
+"https://woocommerce.com/my-account/marketplace-ticket-form/\n"
+"POT-Creation-Date: 2019-04-22 21:44:21+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: src/Admin.php:54
+msgid "Simple registration"
+msgstr ""
+
+#: src/Admin.php:57
+msgid "Determine which fields are shown on simple registration forms."
+msgstr ""
+
+#: src/Admin.php:60
+msgid "Show name fields"
+msgstr ""
+
+#: src/Admin.php:61
+msgid "Determines whether these fields are shown and required."
+msgstr ""
+
+#: src/Admin.php:67
+msgid "Do not show first and last name fields"
+msgstr ""
+
+#: src/Admin.php:68
+msgid "Show optional first and last name fields"
+msgstr ""
+
+#: src/Admin.php:69
+msgid "Require first and last name fields"
+msgstr ""
+
+#: src/Admin.php:74
+msgid "Show privacy text"
+msgstr ""
+
+#: src/Admin.php:75
+msgid "Enable to show privacy policy text after this form."
+msgstr ""
+
+#: src/Frontend.php:94
+msgid "Register"
+msgstr ""
+
+#: src/Frontend.php:112
+msgid "Welcome! You can %1$sview your account here%2$s."
+msgstr ""
+
+#: src/Integrations.php:73
+msgid "Registration shortcodes"
+msgstr ""
+
+#: src/Plugin.php:98
+msgid "Configure"
+msgstr ""
+
+#: src/Plugin.php:172
+#. translators: Placeholders: %s - plugin name
+msgid "You cannot clone instances of %s."
+msgstr ""
+
+#: src/Plugin.php:184
+#. translators: Placeholders: %s - plugin name
+msgid "You cannot unserialize instances of %s."
+msgstr ""
+
+#: templates/registration-form.php:52
+msgid "First name"
+msgstr ""
+
+#: templates/registration-form.php:57
+msgid "Last name"
+msgstr ""
+
+#: templates/registration-form.php:65
+msgid "Username"
+msgstr ""
+
+#: templates/registration-form.php:72
+msgid "Email address"
+msgstr ""
+
+#: templates/registration-form.php:79
+msgid "Password"
+msgstr ""
+
+#: templates/registration-form.php:86
+msgid "Anti-spam"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Simple registration for WooCommerce"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.skyverge.com/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Easily include registration forms via [wc_registration_form] shortcode on a "
+"WooCommerce site."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "SkyVerge"
+msgstr ""
+
+#: src/Frontend.php:164
+#. translators: Placeholders: %1$s - first or given name, %2$s - surname or
+#. last name
+msgctxt "User full name"
+msgid "%1$s %2$s"
+msgstr ""
