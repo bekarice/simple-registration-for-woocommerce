@@ -42,7 +42,7 @@ class Frontend {
 		add_shortcode( 'wc_registration_form', [ $this, 'render_shortcode_content' ] );
 
 		// save name inputs if included in registration forms
-		add_action( 'woocommerce_created_customer', [ $this, 'save_name_inputs' ] );
+		add_action( 'woocommerce_created_customer', [ $this, 'save_form_inputs' ] );
 	}
 
 
@@ -131,14 +131,22 @@ class Frontend {
 	/**
 	 * Save first and last name fields to customer profiles if enabled.
 	 *
+	 * @internal
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param int $customer_id the ID of the new user
 	 */
-	public function save_name_inputs( $customer_id ) {
+	public function save_form_inputs( $customer_id ) {
 
 		$user      = get_userdata( $customer_id );
 		$user_data = [ 'ID' => $customer_id ];
+
+		// first save a flag that this person was created via our registration plugin
+		if ( isset( $_POST['wc_simple_registration_register'] ) ) {
+
+			update_user_meta( $customer_id, '_created_via_simple_registration', true );
+		}
 
 		if ( isset( $_POST['wc_registration_fname'] ) && ! empty( $_POST['wc_registration_fname'] ) ) {
 

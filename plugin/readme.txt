@@ -25,6 +25,7 @@ A simple plugin to add a [wc_registration_form] shortcode to display the registr
 
 == Changelog ==
 
-= 2019.04.22 - version 1.0.0 =
+= 2019.nn.nn - version 1.0.1-dev.1 =
 
-* Initial release
+= 2019.04.22 - version 1.0.0 =
+ * Initial release

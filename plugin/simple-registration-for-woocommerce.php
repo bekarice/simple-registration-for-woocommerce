@@ -5,7 +5,7 @@
  * Description: Easily include registration forms via [wc_registration_form] shortcode on a WooCommerce site.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 1.0.0
+ * Version: 1.0.1-dev.1
  * Text Domain: simple-registration-for-woocommerce
  *
  * Copyright: (c) 2017 Astoundify

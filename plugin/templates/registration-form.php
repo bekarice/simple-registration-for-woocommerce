@@ -97,6 +97,7 @@ wp_enqueue_script( 'wc-password-strength-meter' );
 
 		<p class="woocommerce-FormRow form-row">
 			<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
+			<input type="hidden" id="wc_simple_registration_register" name="wc_simple_registration_register" value="<?php echo esc_attr( $button_text ); ?>" />
 			<button type="submit" class="woocommerce-Button button" name="register" value="<?php echo esc_attr( $button_text ); ?>"><?php echo esc_html( $button_text ); ?></button>
 		</p>
 

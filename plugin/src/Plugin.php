@@ -26,7 +26,7 @@ class Plugin {
 
 
 	/** plugin version */
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1-dev.1';
 
 	/** plugin slug */
 	const ID = 'simple-registration-for-woocommerce';
