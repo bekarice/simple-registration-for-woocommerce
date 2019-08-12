@@ -38,12 +38,22 @@ class Integrations {
 
 
 	/**
-	 * Load this class if Social Login is available.
+	 * Add hooks if particular plugins are available.
+	 *
+	 * @internal
 	 *
 	 * @since 1.0.0
 	 */
 	public function init_class() {
 
+		// Jilt for WooCommerce!
+		if ( function_exists( 'wc_jilt' ) ) {
+
+			add_action( 'woocommerce_created_customer', [ $this, 'update_jilt_customer' ], 15 ); // keep this > priority 10
+		}
+
+
+		// WooCommerce Social Login
 		if ( function_exists( 'wc_social_login' ) ) {
 
 			// add simple registration to social login display settings
@@ -52,6 +62,91 @@ class Integrations {
 			// show the social login buttons if enabled
 			add_action( 'woocommerce_register_form_end', [ $this, 'render_social_login_buttons' ] );
 		}
+	}
+
+
+	/**
+	 * Update the customer record in Jilt with marketing opt in.
+	 *
+	 * @internal
+	 *
+	 * @since 1.0.1-dev.1
+	 *
+	 * @param int $user_id the newly created customer's ID
+	 */
+	public function update_jilt_customer( $user_id ) {
+
+		// only make changes for our form submission
+		if ( get_user_meta( $user_id, '_created_via_simple_registration', true ) ) {
+
+			$integration = wc_jilt()->get_integration();
+			$api         = $integration->get_api();
+			$user        = get_userdata( $user_id );
+
+			if ( $integration->is_jilt_connected() ) {
+
+				$token = is_string( $api->get_auth_token() ) ? $api->get_auth_token() : $api->get_auth_token()->get_token();
+				$url = $this->get_customers_api_endpoint( $integration ) . str_replace( '.', '%2E', urlencode( $user->user_email ) );
+
+				$args = [
+					'method'       => 'PUT',
+					'accept'       => 'application/json',
+					'content-type' => 'application/x-www-form-urlencoded',
+					'timeout'      => 3,
+					'headers'      => [
+						'x-jilt-shop-domain' => wc_jilt()->get_shop_domain(),
+						'Authorization'      => $api->get_auth_scheme() . ' ' . $token,
+					],
+					'body' => [
+						'accepts_marketing' => true,
+					],
+				];
+
+				$response = wp_safe_remote_request( $url, $args );
+
+				// we can't do anything with this data yet, but save it in case for GDPR
+				$this->update_local_user_data( $user_id );
+			}
+		}
+	}
+
+
+	/**
+	 * Returns the customer API endpoint for Jilt.
+	 *
+	 * @since 1.0.1-dev.1
+	 *
+	 * @param \WC_Jilt_Integration $integration the Jilt integration class
+	 * @return string the customers API endpoint
+	 */
+	private function get_customers_api_endpoint( $integration ) {
+
+		return sprintf( '%s/shops/%s/customers/', $integration->get_api()->get_api_endpoint(), $integration->get_linked_shop_id() );
+	}
+
+
+	/**
+	 * Update local customer meta with consent opt in info.
+	 *
+	 * @since 1.0.1-dev.1
+	 *
+	 * @param int $user_id the created customer's ID
+	 */
+	private function update_local_user_data( $user_id ) {
+
+		$customer    = new \WC_Customer( $user_id );
+		$button_text = isset( $_POST['wc_simple_registration_register'] ) ? wc_clean( $_POST['wc_simple_registration_register'] ) : __( 'Register', 'simple-registration-for-woocommerce' );
+
+		$customer->update_meta_data( '_wc_jilt_accepts_marketing', true );
+		$customer->update_meta_data( '_wc_jilt_consent_context', 'simple_registration_form' );
+		$customer->update_meta_data( '_wc_jilt_consent_timestamp', date( 'Y-m-d\TH:i:s\Z', time() ) );
+		$customer->update_meta_data( '_wc_jilt_consent_notice', $button_text );
+
+		if ( class_exists( '\\WC_Geolocation' ) ) {
+			$customer->update_meta_data( '_wc_jilt_consent_ip_address', \WC_Geolocation::get_ip_address() );
+		}
+
+		$customer->save();
 	}
 
 
